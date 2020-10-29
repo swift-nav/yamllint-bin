@@ -196,6 +196,7 @@ def make_exe(dist):
     # to our binary.
     #exe.add_python_resources(exe.pip_install(["-r", "requirements.txt"]))
     
+    exe.add_python_resources(exe.pip_install(["pyyaml", "--global-option=--without-libyaml"]))
     exe.add_python_resources(exe.pip_install(["./yamllint"]))
 
     # Read Python files from a local directory and add them to our embedded
