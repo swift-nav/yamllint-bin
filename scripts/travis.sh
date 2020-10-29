@@ -13,6 +13,8 @@ if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
   docker cp musl-builder-run:/home/rust/src/$build_dir/yamllint \
     dist/yamllint-linux
 
+  strip dist/yamllint-linux
+
   docker rm musl-builder-run
   docker rmi musl-builder
 
@@ -25,6 +27,8 @@ elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
 
   mkdir -p dist
   cp build/*/release/install/yamllint dist/yamllint-macos
+
+  strip dist/yamllint-macos
 
 elif [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
 
