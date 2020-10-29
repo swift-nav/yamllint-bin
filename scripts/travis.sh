@@ -18,7 +18,10 @@ if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
 
 elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
 
-  brew install python@3
+  brew install python@3.7
+  brew unlink python
+  brew link python
+
   python3 -V
 
   cargo install pyoxidizer
