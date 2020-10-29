@@ -11,7 +11,7 @@ if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
   mkdir -p dist
 
   docker cp musl-builder-run:/home/rust/src/$build_dir/yamllint \
-    dist/yamllint
+    dist/yamllint-linux
 
   docker rm musl-builder-run
   docker rmi musl-builder
@@ -24,7 +24,7 @@ elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
   pyoxidizer build --release
 
   mkdir -p dist
-  cp build/*/release/install/yamllint dist/yamllint
+  cp build/*/release/install/yamllint dist/yamllint-macos
 
 elif [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
 
@@ -32,5 +32,5 @@ elif [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
   pyoxidizer build --release
 
   mkdir -p dist
-  cp build/*/release/install/yamllint* dist
+  cp build/*/release/install/yamllint.exe dist/yamllint-windows.exe
 fi

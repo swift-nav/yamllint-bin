@@ -24,7 +24,7 @@ _github_api_key: &_github_api_key
 deploy:
   - provider: releases
     file_glob: true
-    file: "dist/yamllint.exe"
+    file: "dist/yamllint-windows.exe"
     skip_cleanup: true
     "on":
       tags: true
@@ -32,7 +32,7 @@ deploy:
     <<: *_github_api_key
   - provider: releases
     file_glob: true
-    file: "dist/yamllint"
+    file: "dist/yamllint-macos"
     skip_cleanup: true
     "on":
       tags: true
@@ -40,7 +40,7 @@ deploy:
     <<: *_github_api_key
   - provider: releases
     file_glob: true
-    file: "dist/yamllint"
+    file: "dist/yamllint-linux"
     skip_cleanup: true
     "on":
       tags: true
