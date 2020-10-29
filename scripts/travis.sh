@@ -11,9 +11,12 @@ if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
   mkdir -p dist
 
   docker cp musl-builder-run:/home/rust/src/$build_dir/yamllint \
-    dist/yamllint-linux
+    dist/yamllint-linux.bin
 
-  strip dist/yamllint-linux
+  strip dist/yamllint-linux.bin
+
+  curl -sSL https://github.com/upx/upx/releases/download/v3.96/upx-3.96-amd64_linux.tar.xz | tar xvfJ
+  ./upx-3.96-amd64_linux/upx -9 dist/yamllint-linux.bin -o dist/yamllint-linux
 
   docker rm musl-builder-run
   docker rmi musl-builder
@@ -26,9 +29,12 @@ elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
   pyoxidizer build --release
 
   mkdir -p dist
-  cp build/*/release/install/yamllint dist/yamllint-macos
+  cp build/*/release/install/yamllint dist/yamllint-macos.bin
 
-  strip dist/yamllint-macos
+  strip dist/yamllint-macos.bin
+
+  brew install upx
+  upx -9 dist/yamllint-macos.bin -o dist/yamllint-macos
 
 elif [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
 
@@ -36,5 +42,10 @@ elif [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
   pyoxidizer build --release
 
   mkdir -p dist
-  cp build/*/release/install/yamllint.exe dist/yamllint-windows.exe
+  cp build/*/release/install/yamllint.exe dist/yamllint-windows-bin.exe
+
+  curl -LO https://github.com/upx/upx/releases/download/v3.96/upx-3.96-win64.zip
+  7z x upx-3.96-win64.zip
+
+  ./upx-3.96-win64/upx.exe -9 dist/yamllint-windows-bin.exe -o dist/yamllint-windows.exe
 fi
