@@ -18,8 +18,6 @@ if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
 
 elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
 
-  brew install libyaml
-
   RUSTFLAGS="-C link-arg=-L/usr/local/opt/libyaml/lib"
 
   cargo install pyoxidizer
