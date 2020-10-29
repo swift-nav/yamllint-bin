@@ -3,6 +3,6 @@
 set -ex
 
 cargo install pyoxidizer
-pyoxidizer run --release
+pyoxidizer build --release
 
 cp build/*/releaes/install/yamllint* .
