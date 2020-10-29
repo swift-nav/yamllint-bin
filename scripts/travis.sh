@@ -18,7 +18,7 @@ if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
 
 elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
 
-  RUSTFLAGS="-C link-arg=-L/usr/local/opt/libyaml/lib"
+  export RUSTFLAGS="-C link-arg=-L/usr/local/opt/libyaml/lib -C link-arg=/usr/local/opt/libyaml/lib/libyaml.a"
 
   cargo install pyoxidizer
   pyoxidizer build --release
