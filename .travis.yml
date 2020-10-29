@@ -9,7 +9,7 @@ matrix:
     - os: linux
     - os: windows
     - os: osx
-      osx_image: xcode10
+      osx_image: xcode11
 
 cache:
   cargo: true
