@@ -15,7 +15,7 @@ if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
 
   strip dist/yamllint-linux.bin
 
-  curl -sSL https://github.com/upx/upx/releases/download/v3.96/upx-3.96-amd64_linux.tar.xz | tar xvfJ
+  curl -sSL https://github.com/upx/upx/releases/download/v3.96/upx-3.96-amd64_linux.tar.xz | tar -xvJf -
   ./upx-3.96-amd64_linux/upx -9 dist/yamllint-linux.bin -o dist/yamllint-linux
 
   docker rm musl-builder-run
