@@ -3,4 +3,4 @@
 	url = https://github.com/silverjam/yamllint.git
 [submodule "PyOxidizer"]
 	path = PyOxidizer
-	url = git@github.com:silverjam/PyOxidizer.git
+	url = https://github.com/silverjam/PyOxidizer.git
