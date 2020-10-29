@@ -5,7 +5,7 @@ set -ex
 if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
 
   docker build --tag musl-builder -f Dockerfile.linux .
-  docker run -it --name musl-builder-run musl-builder
+  docker run --name musl-builder-run musl-builder
 
   build_dir=build/x86_64-unknown-linux-musl/release/install
   mkdir -p $build_dir
