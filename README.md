@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.com/swift-nav/yamllint-bin.svg?token=Usmy93JBkW76XB4WJAjb&branch=main)](https://travis-ci.com/swift-nav/yamllint-bin)
 
-Binary build of [yamllint](https://github.com/adrienverge/yamllint) using [PyOxidizer](https://pyoxidizer.readthedocs.io/en/stable/).  Binaries are stripped and compressed with [upx](https://upx.github.io/).
+**Unofficial** binary build of [yamllint](https://github.com/adrienverge/yamllint) using [PyOxidizer](https://pyoxidizer.readthedocs.io/en/stable/).  Binaries are stripped and compressed with [upx](https://upx.github.io/) to reduce overall size, on Windows anti-virus systems may have issues with the upx compressed executable (whitelist yamllint.exe in that case).
 
 ## Copyright
 
