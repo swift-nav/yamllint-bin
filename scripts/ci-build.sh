@@ -29,7 +29,7 @@ elif [[ "$RUNNER_OS" == "macOS" ]]; then
 
   export RUSTFLAGS="-C link-arg=/usr/local/opt/libyaml/lib/libyaml.a"
 
-  (cd PyOxidizer; cargo install ./pyoxidizer)
+  (cd PyOxidizer; cargo install --path ./pyoxidizer)
   pyoxidizer build --release
 
   mkdir -p dist
@@ -46,7 +46,7 @@ elif [[ "$RUNNER_OS" == "macOS" ]]; then
 
 elif [[ "$RUNNER_OS" == "Windows" ]]; then
 
-  (cd PyOxidizer; cargo install ./pyoxidizer)
+  (cd PyOxidizer; cargo install --path ./pyoxidizer)
   pyoxidizer build --release
 
   mkdir -p dist
