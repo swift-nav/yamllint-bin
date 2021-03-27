@@ -2,7 +2,7 @@
 
 set -ex
 
-if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+if [[ "$RUNNER_OS" == "Linux" ]]; then
 
   docker build --tag musl-builder -f Dockerfile.linux .
   docker run --name musl-builder-run musl-builder
@@ -23,11 +23,13 @@ if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
   docker rm musl-builder-run
   docker rmi musl-builder
 
-elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+  echo "dist/yamllint-linux" >release-archive.filename
+
+elif [[ "$RUNNER_OS" == "macOS" ]]; then
 
   export RUSTFLAGS="-C link-arg=/usr/local/opt/libyaml/lib/libyaml.a"
 
-  cargo install --version 0.9.0 pyoxidizer
+  (cd PyOxidizer; cargo install ./pyoxidizer)
   pyoxidizer build --release
 
   mkdir -p dist
@@ -40,9 +42,11 @@ elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
   rm -f dist/yamllint-macos
   upx -9 dist/yamllint-macos.bin -o dist/yamllint-macos
 
-elif [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
+  echo "dist/yamllint-macos" >release-archive.filename
 
-  cargo install --version 0.9.0 pyoxidizer
+elif [[ "$RUNNER_OS" == "Windows" ]]; then
+
+  (cd PyOxidizer; cargo install ./pyoxidizer)
   pyoxidizer build --release
 
   mkdir -p dist
@@ -53,4 +57,6 @@ elif [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
 
   rm -f dist/yamllint-windows.exe
   ./upx-3.96-win64/upx.exe -9 dist/yamllint-windows-bin.exe -o dist/yamllint-windows.exe
+
+  echo "dist/yamllint-windows.exe" >release-archive.filename
 fi
