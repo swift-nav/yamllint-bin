@@ -16,6 +16,8 @@ if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
   strip dist/yamllint-linux.bin
 
   curl -sSL https://github.com/upx/upx/releases/download/v3.96/upx-3.96-amd64_linux.tar.xz | tar -xvJf -
+
+  rm -f dist/yamllint-linux
   ./upx-3.96-amd64_linux/upx -9 dist/yamllint-linux.bin -o dist/yamllint-linux
 
   docker rm musl-builder-run
@@ -34,6 +36,8 @@ elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
   strip dist/yamllint-macos.bin
 
   brew install upx
+
+  rm -f dist/yamllint-macos
   upx -9 dist/yamllint-macos.bin -o dist/yamllint-macos
 
 elif [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
@@ -47,5 +51,6 @@ elif [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
   curl -LO https://github.com/upx/upx/releases/download/v3.96/upx-3.96-win64.zip
   7z x upx-3.96-win64.zip
 
+  rm -f dist/yamllint-windows.exe
   ./upx-3.96-win64/upx.exe -9 dist/yamllint-windows-bin.exe -o dist/yamllint-windows.exe
 fi

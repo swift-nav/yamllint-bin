@@ -13,7 +13,7 @@ def make_exe(dist):
         config=python_config,
     )
 
-    #exe.add_python_resources(exe.pip_install(["pyyaml", "--global-option=--without-libyaml"]))
+    #exe.add_python_resources(exe.pip_install(["pyyaml==5.2", "--global-option=--without-libyaml"]))
     exe.add_python_resources(exe.pip_install(["./yamllint"]))
 
     return exe
