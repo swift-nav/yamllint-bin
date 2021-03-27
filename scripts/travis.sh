@@ -27,7 +27,7 @@ elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
 
   export RUSTFLAGS="-C link-arg=/usr/local/opt/libyaml/lib/libyaml.a"
 
-  cargo install pyoxidizer
+  cargo install --version 0.9.0 pyoxidizer
   pyoxidizer build --release
 
   mkdir -p dist
@@ -42,7 +42,7 @@ elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
 
 elif [[ "$TRAVIS_OS_NAME" == "windows" ]]; then
 
-  cargo install pyoxidizer
+  cargo install --version 0.9.0 pyoxidizer
   pyoxidizer build --release
 
   mkdir -p dist
