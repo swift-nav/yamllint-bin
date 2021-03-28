@@ -2,6 +2,8 @@
 
 set -ex
 
+version=$(git describe --tags)
+
 if [[ "$RUNNER_OS" == "Linux" ]]; then
 
   rm -f PyOxidizer/yamllint
@@ -30,9 +32,11 @@ if [[ "$RUNNER_OS" == "Linux" ]]; then
   curl -sSL https://github.com/upx/upx/releases/download/v3.96/upx-3.96-amd64_linux.tar.xz | tar -xvJf -
 
   rm -f dist/yamllint-linux
-  ./upx-3.96-amd64_linux/upx -9 dist/yamllint-linux.bin -o dist/yamllint-linux
+  ./upx-3.96-amd64_linux/upx -9 dist/yamllint-linux.bin -o dist/yamllint
 
-  echo "dist/yamllint-linux" >release-archive.filename
+  tar -C dist -f "yamllint-$version-linux.tgz" yamllint
+
+  echo "yamllint-$version-linux.tgz" >release-archive.filename
 
 elif [[ "$RUNNER_OS" == "macOS" ]]; then
 
@@ -49,9 +53,11 @@ elif [[ "$RUNNER_OS" == "macOS" ]]; then
   brew install upx
 
   rm -f dist/yamllint-macos
-  upx -9 dist/yamllint-macos.bin -o dist/yamllint-macos
+  upx -9 dist/yamllint-macos.bin -o dist/yamllint
 
-  echo "dist/yamllint-macos" >release-archive.filename
+  tar -C dist -f "yamllint-$version-macos.tgz" yamllint
+
+  echo "yamllint-$version-macos.tgz" >release-archive.filename
 
 elif [[ "$RUNNER_OS" == "Windows" ]]; then
 
@@ -65,7 +71,9 @@ elif [[ "$RUNNER_OS" == "Windows" ]]; then
   7z x upx-3.96-win64.zip
 
   rm -f dist/yamllint-windows.exe
-  ./upx-3.96-win64/upx.exe -9 dist/yamllint-windows-bin.exe -o dist/yamllint-windows.exe
+  ./upx-3.96-win64/upx.exe -9 dist/yamllint-windows-bin.exe -o dist/yamllint.exe
 
-  echo "dist/yamllint-windows.exe" >release-archive.filename
+  7z a -tzip "../yamllint-$version-windows.zip" yamllint.exe
+
+  echo "../yamllint-$version-windows.zip" >release-archive.filename
 fi
