@@ -11,10 +11,13 @@ ADD --chown=rust:rust . ./
 ENV USER=rust
 ENV JEMALLOC_SYS_DISABLE_SHARED=1
 
-RUN cd PyOxidizer && cargo build --release
+RUN cd PyOxidizer && \
+  git checkout silverjam/0.9.0 \
+  cargo build --release
 
 RUN cd PyOxidizer && \
   ln -sf ../yamllint yamllint && \
-  cargo run --release -- build --target-triple x86_64-unknown-linux-musl --release --path yamllint
+  cargo run --release -- build \
+    --target-triple x86_64-unknown-linux-musl --release --path yamllint
 
 # vim: ft=dockerfile:
