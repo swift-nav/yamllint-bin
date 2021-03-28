@@ -15,6 +15,7 @@ if [[ "$RUNNER_OS" == "Linux" ]]; then
 
   docker run --rm --name musl-builder-run -v "$PWD:/work" musl-builder \
     sh -c "cd PyOxidizer && cargo build --release && \
+           sudo chown -R rust:rust . && \
            cargo run --release -- build \
              --target-triple x86_64-unknown-linux-musl --release --path yamllint"
 
@@ -27,9 +28,6 @@ if [[ "$RUNNER_OS" == "Linux" ]]; then
 
   rm -f dist/yamllint-linux
   ./upx-3.96-amd64_linux/upx -9 dist/yamllint-linux.bin -o dist/yamllint-linux
-
-  docker rm musl-builder-run
-  docker rmi musl-builder
 
   echo "dist/yamllint-linux" >release-archive.filename
 
