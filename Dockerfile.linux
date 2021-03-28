@@ -6,16 +6,9 @@ RUN sudo apt-get update && \
     sudo apt-get install -y python3.8-dev && \
     sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.8 2
 
-ADD --chown=rust:rust . ./
-
 ENV USER=rust
 ENV JEMALLOC_SYS_DISABLE_SHARED=1
 
-RUN cd PyOxidizer && cargo build --release
-
-RUN cd PyOxidizer && \
-  ln -sf ../yamllint yamllint && \
-  cargo run --release -- build \
-    --target-triple x86_64-unknown-linux-musl --release --path yamllint
+WORKDIR /work
 
 # vim: ft=dockerfile:

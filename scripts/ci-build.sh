@@ -4,14 +4,18 @@ set -ex
 
 if [[ "$RUNNER_OS" == "Linux" ]]; then
 
-  docker build --tag musl-builder -f Dockerfile.linux .
-  docker run --name musl-builder-run musl-builder
-
-  build_dir=build/x86_64-unknown-linux-musl/release/install
   mkdir -p dist
 
-  docker cp musl-builder-run:/home/rust/src/$build_dir/yamllint \
-    dist/yamllint-linux.bin
+  docker build --tag musl-builder -f Dockerfile.linux .
+
+  docker run --name musl-builder-run -v "$PWD:/work" musl-builder \
+    sh -c "cd PyOxidizer && cargo build --release && \
+           ln -sf ../yamllint yamllint && \
+           cargo run --release -- build \
+             --target-triple x86_64-unknown-linux-musl --release --path yamllint"
+
+  build_dir=build/x86_64-unknown-linux-musl/release/install
+  cp $build_dir/yamllint dist/yamllint-linux.bin
 
   strip dist/yamllint-linux.bin
 
