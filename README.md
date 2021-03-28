@@ -1,6 +1,6 @@
 # yamllint-bin
 
-[![Build Status](https://travis-ci.com/swift-nav/yamllint-bin.svg?token=Usmy93JBkW76XB4WJAjb&branch=main)](https://travis-ci.com/swift-nav/yamllint-bin)
+[![ci](https://github.com/swift-nav/yamllint-bin/actions/workflows/ci.yaml/badge.svg)](https://github.com/swift-nav/yamllint-bin/actions/workflows/ci.yaml)
 
 **Unofficial** binary build of [yamllint](https://github.com/adrienverge/yamllint) using [PyOxidizer](https://pyoxidizer.readthedocs.io/en/stable/).  Binaries are stripped and compressed with [upx](https://upx.github.io/) to reduce overall size, on Windows anti-virus systems may have issues with the upx compressed executable (whitelist yamllint.exe in that case).
 
