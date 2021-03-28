@@ -20,6 +20,8 @@ if [[ "$RUNNER_OS" == "Linux" ]]; then
            cargo run --release -- build \
              --target-triple x86_64-unknown-linux-musl --release --path yamllint"
 
+  sudo chown -R "$USER:$USER" .
+
   build_dir=build/x86_64-unknown-linux-musl/release/install
   cp $build_dir/yamllint dist/yamllint-linux.bin
 
