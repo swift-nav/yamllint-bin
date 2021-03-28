@@ -14,8 +14,9 @@ if [[ "$RUNNER_OS" == "Linux" ]]; then
   docker build --tag musl-builder -f Dockerfile.linux .
 
   docker run --rm --name musl-builder-run -v "$PWD:/work" musl-builder \
-    sh -c "cd PyOxidizer && cargo build --release && \
-           sudo chown -R rust:rust . && \
+    sh -c "sudo chown -R rust:rust . && \
+           cd PyOxidizer && \
+           cargo build --release && \
            cargo run --release -- build \
              --target-triple x86_64-unknown-linux-musl --release --path yamllint"
 
