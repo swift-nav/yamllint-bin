@@ -4,7 +4,12 @@ set -ex
 
 if [[ "$RUNNER_OS" == "Linux" ]]; then
 
+  rm -f PyOxidizer/yamllint
+
+  mkdir -p PyOxidizer/target
   mkdir -p dist
+
+  (cd PyOxidizer && ln -sf ../yamllint .)
 
   docker build --tag musl-builder -f Dockerfile.linux .
 
