@@ -5,8 +5,9 @@ def make_exe(dist):
     policy = dist.make_python_packaging_policy()
     python_config = dist.make_python_interpreter_config()
 
-    #python_config.run_mode = 'module:yamllint'
-    python_config.run_module = 'yamllint'
+    python_config.run_mode = 'module:yamllint'
+    ## PyOxidizer 0.12.0:
+    # python_config.run_module = 'yamllint'
 
     exe = dist.to_python_executable(
         name="yamllint",
