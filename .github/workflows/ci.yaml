@@ -23,6 +23,7 @@ jobs:
 
       - name: Run build
         run: |
+          git fetch --prune --unshallow
           bash ./scripts/ci-build.sh
           echo "RELEASE_ARCHIVE=$(cat release-archive.filename)" >>$GITHUB_ENV
 
