@@ -6,16 +6,15 @@ if [[ "$RUNNER_OS" == "Linux" ]]; then
 
   rm -f PyOxidizer/yamllint
 
-  mkdir -p PyOxidizer/target
+  mkdir -p PyOxidizer/target/release
   mkdir -p dist
 
   (cd PyOxidizer && ln -sf ../yamllint .)
 
   docker build --tag musl-builder -f Dockerfile.linux .
 
-  docker run --name musl-builder-run -v "$PWD:/work" musl-builder \
+  docker run --rm --name musl-builder-run -v "$PWD:/work" musl-builder \
     sh -c "cd PyOxidizer && cargo build --release && \
-           ln -sf ../yamllint yamllint && \
            cargo run --release -- build \
              --target-triple x86_64-unknown-linux-musl --release --path yamllint"
 
