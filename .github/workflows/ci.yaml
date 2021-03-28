@@ -53,6 +53,7 @@ jobs:
 
       - name: Run build
         run: |
+          git fetch --prune --unshallow
           bash ./scripts/ci-build.sh
           echo "RELEASE_ARCHIVE=$(cat release-archive.filename)" >>$GITHUB_ENV
 
@@ -95,6 +96,7 @@ jobs:
           LIBCLANG_PATH: "C:\\Program Files\\LLVM\\bin"
         run: |
           export PATH="$PATH:/C/Rust/.cargo/bin:/C/ProgramData/chocolatey/bin:/C/Program Files/CMake/bin"
+          git fetch --prune --unshallow
           bash ./scripts/ci-build.sh
           echo "RELEASE_ARCHIVE=$(cat release-archive.filename)" >>$GITHUB_ENV
 
