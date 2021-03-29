@@ -34,7 +34,7 @@ if [[ "$RUNNER_OS" == "Linux" ]]; then
   rm -f dist/yamllint-linux
   ./upx-3.96-amd64_linux/upx -9 dist/yamllint-linux.bin -o dist/yamllint
 
-  tar -C dist -cvf "yamllint-$version-linux.tgz" yamllint
+  tar -C dist -czf "yamllint-$version-linux.tgz" yamllint
 
   echo "yamllint-$version-linux.tgz" >release-archive.filename
 
@@ -55,7 +55,7 @@ elif [[ "$RUNNER_OS" == "macOS" ]]; then
   rm -f dist/yamllint-macos
   upx -9 dist/yamllint-macos.bin -o dist/yamllint
 
-  tar -C dist -cvf "yamllint-$version-macos.tgz" yamllint
+  tar -C dist -czf "yamllint-$version-macos.tgz" yamllint
 
   echo "yamllint-$version-macos.tgz" >release-archive.filename
 
